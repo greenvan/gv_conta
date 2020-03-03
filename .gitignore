@@ -350,3 +350,12 @@ build/
 # End of https://www.gitignore.io/api/dart,swift,xcode,android,intellij,cocoapods,objective-c,androidstudio
 
 **/flutter_export_environment.sh
+lib/generated_plugin_registrant.dart
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+pubspec.lock
+.packages
+.dart_tool/package_config.json
+.packages
+pubspec.lock

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gvconta/pages/root_page.dart';
 
 void main() => runApp(GVContaApp());
 
@@ -11,11 +12,7 @@ class GVContaApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: Scaffold(
-          appBar: AppBar(title: Text('Welcome to GVConta')),
-          body: SafeArea(
-            child: Center(child: Text('Welcome to GVConta, my friend')),
-          )),
+      home: RootPage(),
     );
   }
 }
