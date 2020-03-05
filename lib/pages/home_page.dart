@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/user.dart';
 import 'package:gvconta/system/auth_provider.dart';
+import 'package:gvconta/system/db.dart' as db;
+import 'package:gvconta/widgets/loading.dart';
+import 'package:gvconta/widgets/red_error.dart';
+import 'package:gvconta/widgets/user_board.dart';
 
 class HomePage extends StatelessWidget {
   void _signOut(BuildContext context) async {
@@ -12,42 +16,27 @@ class HomePage extends StatelessWidget {
     }
   }
 
-  Future<String> _getUid(BuildContext context) async {
-    String uid = '';
-    try {
-      var auth = AuthProvider.of(context).auth;
-      uid = await auth.currentUser();
-    } catch (e) {
-      print("Error: $e");
-    }
-
-    return uid;
-  }
-
   @override
   Widget build(BuildContext context) {
-    String userId = '';
-    //final labels = AppLocalizations.of(context);
-
-    _getUid(context).then((onValue) {
-      userId = onValue;
-    });
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text('GVConta'), //Text(labels.app.name),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.exit_to_app),
-              onPressed: () => _signOut(context),
-            )
-          ],
-        ),
-        body: Center(child: Text('user id: $userId'))
-
-        /*StreamBuilder(
-        stream: db.getGroups(),
-        builder: (context, AsyncSnapshot<List<Group>> snapshot) {
+      appBar: AppBar(
+        leading: Icon(Icons.group_work),
+        title: Text(
+          'GVConta',
+        ), //TODO Text(labels.app.name),
+        actions: <Widget>[
+          //TODO: Añadir un about us.
+          //TODO: Quizá sea demasiado accesible el icono de signOut, esconder detrás de un menú para más seguridad.
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            //TODO: Pedir confirmación antes de salir
+            onPressed: () => _signOut(context),
+          ),
+        ],
+      ),
+      body: StreamBuilder(
+        stream: db.getUser(context),
+        builder: (context, AsyncSnapshot<User> snapshot) {
           if (snapshot.hasError) {
             return RedError(snapshot.error);
           }
@@ -55,9 +44,9 @@ class HomePage extends StatelessWidget {
             return Loading();
           }
 
-          return GroupList(groups: snapshot.data);
+          return UserBoard(user: snapshot.data);
         },
-      ),*/
-        );
+      ),
+    );
   }
 }

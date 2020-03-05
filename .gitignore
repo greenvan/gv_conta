@@ -359,3 +359,15 @@ pubspec.lock
 .dart_tool/package_config.json
 .packages
 pubspec.lock
+android/app/google-services.json
+web/index.html
+web/manifest.json
+web/icons/Icon-192.png
+web/icons/Icon-512.png
+.dart_tool/flutter_build/e71997db9411ba0985b68844d8f831dc/.filecache
+.dart_tool/flutter_build/e71997db9411ba0985b68844d8f831dc/app.dill
+.dart_tool/flutter_build/e71997db9411ba0985b68844d8f831dc/debug_android_application.stamp
+.dart_tool/flutter_build/e71997db9411ba0985b68844d8f831dc/flutter_assets.d
+.dart_tool/flutter_build/e71997db9411ba0985b68844d8f831dc/kernel_snapshot.d
+.dart_tool/flutter_build/e71997db9411ba0985b68844d8f831dc/kernel_snapshot.stamp
+.idea/runConfigurations/main_dart.xml

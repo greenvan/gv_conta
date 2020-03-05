@@ -12,3 +12,7 @@ class User {
         email = doc.data['email'],
         image = doc.data['image'];
 }
+
+User toUser(DocumentSnapshot doc) {
+  return User.fromFirestore(doc);
+}
