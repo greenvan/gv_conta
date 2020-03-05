@@ -45,6 +45,12 @@ class UserActions extends StatelessWidget {
     Icon(Icons.category)
   ];
 
+  final List<String> _userActionRoutes = [
+    '/account_list',
+    '/account_list_filtered',
+    '/categories'
+  ];
+
   UserActions(this.user);
 
   @override
@@ -55,14 +61,20 @@ class UserActions extends StatelessWidget {
         UserButton(
           icon: _userActionIcons[0],
           label: _userActionLabels[0],
+          user: this.user,
+          route: _userActionRoutes[0],
         ),
         UserButton(
           icon: _userActionIcons[1],
           label: _userActionLabels[1],
+          user: this.user,
+          route: _userActionRoutes[1],
         ),
         UserButton(
           icon: _userActionIcons[2],
           label: _userActionLabels[2],
+          user: this.user,
+          route: _userActionRoutes[2],
         ),
       ],
     );
@@ -70,9 +82,14 @@ class UserActions extends StatelessWidget {
 }
 
 class UserButton extends StatelessWidget {
-  final String label;
+  final String label, route;
   final Icon icon;
-  const UserButton({@required this.label, @required this.icon});
+  final User user;
+  const UserButton(
+      {@required this.label,
+      @required this.icon,
+      @required this.user,
+      @required this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +120,7 @@ class UserButton extends StatelessWidget {
           elevation: 12,
           onPressed: () {
             print('Raised button pressed by uid');
+            Navigator.of(context).pushNamed(route, arguments: user);
           },
         ),
       ),
