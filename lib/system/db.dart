@@ -33,10 +33,8 @@ Stream<User> getUser_uid(String uid) {
   return userSnapshot.map(toUser);
 }*/
 
-Stream<List<Account>> getAccounts(BuildContext context) async* {
-  String uid = await _getUid(context);
-
-  yield* Firestore.instance
+Stream<List<Account>> getAccountList(String uid) {
+  return Firestore.instance
       .collection('users/$uid/accounts')
       .snapshots()
       .map(toAccountList);

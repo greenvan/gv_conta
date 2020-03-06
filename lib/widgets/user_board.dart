@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gvconta/model/user.dart';
 import 'package:gvconta/widgets/user_card.dart';
 
+import 'home_button.dart';
+
 class UserBoard extends StatelessWidget {
   const UserBoard({@required this.user});
 
@@ -58,72 +60,25 @@ class UserActions extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        UserButton(
+        HomeButton(
           icon: _userActionIcons[0],
           label: _userActionLabels[0],
-          user: this.user,
           route: _userActionRoutes[0],
+          arguments: this.user,
         ),
-        UserButton(
+        HomeButton(
           icon: _userActionIcons[1],
           label: _userActionLabels[1],
-          user: this.user,
           route: _userActionRoutes[1],
+          arguments: this.user,
         ),
-        UserButton(
+        HomeButton(
           icon: _userActionIcons[2],
           label: _userActionLabels[2],
-          user: this.user,
           route: _userActionRoutes[2],
+          arguments: this.user,
         ),
       ],
-    );
-  }
-}
-
-class UserButton extends StatelessWidget {
-  final String label, route;
-  final Icon icon;
-  final User user;
-  const UserButton(
-      {@required this.label,
-      @required this.icon,
-      @required this.user,
-      @required this.route});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 12.0),
-      child: SizedBox(
-        height: 80,
-        width: 220,
-        child: RaisedButton.icon(
-          icon: icon,
-          label: Expanded(
-            child: Text(
-              label,
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .title
-                  .copyWith(color: Colors.white),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          color: Theme.of(context).accentColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          textColor: Colors.white70,
-          elevation: 12,
-          onPressed: () {
-            print('Raised button pressed by uid');
-            Navigator.of(context).pushNamed(route, arguments: user);
-          },
-        ),
-      ),
     );
   }
 }

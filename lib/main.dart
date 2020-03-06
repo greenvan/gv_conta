@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/pages/account_list_page.dart';
+import 'package:gvconta/pages/account_page.dart';
 import 'package:gvconta/pages/root_page.dart';
 import 'package:gvconta/system/auth.dart';
 import 'package:gvconta/system/auth_provider.dart';
@@ -21,6 +22,7 @@ class GVContaApp extends StatelessWidget {
         routes: {
           '/': (_) => RootPage(),
           '/account_list': (_) => AccountListPage(),
+          '/account': (_) => AccountPage(),
         },
       ),
     );
