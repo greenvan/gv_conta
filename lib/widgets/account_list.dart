@@ -11,14 +11,14 @@ class AccountList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: CustomScrollView(
         slivers: <Widget>[
           SliverGrid(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
+              mainAxisSpacing: 2,
+              crossAxisSpacing: 2,
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

@@ -40,10 +40,24 @@ Stream<List<Account>> getAccountList(String uid) {
       .map(toAccountList);
 }
 
-Future<void> updateUser(User user) async {
-  /* await Firestore.instance
-      .document('users/${user.uid}/')
-      .updateData();*/
+Future<void> updateUserName(User user) async {
+  Map<String, dynamic> values = new Map<String, dynamic>();
+  values["name"] = user.name;
+  await Firestore.instance.document('users/${user.uid}/').updateData(values);
+}
+
+Future<void> updateAccountName(User user, Account account) async {
+  Map<String, dynamic> values = new Map<String, dynamic>();
+  values["name"] = account.name;
+  await Firestore.instance
+      .document('users/${user.uid}/accounts/${account.id}')
+      .updateData(values);
+}
+
+Future<void> addAccount(User user, Account account) async {
+  await Firestore.instance
+      .collection('users/${user.uid}/accounts')
+      .add(account.toFirestore());
 }
 
 /*

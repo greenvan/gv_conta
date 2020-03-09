@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/account.dart';
+import 'package:gvconta/model/user.dart';
+import 'package:gvconta/system/user_provider.dart';
 import 'package:gvconta/widgets/navigation_arguments.dart';
 
 class AccountTile extends StatelessWidget {
@@ -10,13 +12,14 @@ class AccountTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
+          User user = UserProvider.of(context).user;
           Navigator.of(context).pushNamed('/account',
-              arguments: NavigationArguments(account: account));
+              arguments: NavigationArguments(account: account, user: user));
         },
         child: Card(
-          elevation: 10,
+          elevation: 6,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(4.0),
           ),
           child: Stack(
             children: <Widget>[

@@ -49,8 +49,8 @@ class UserActions extends StatelessWidget {
 
   final List<String> _userActionRoutes = [
     '/account_list',
-    '/account_list_filtered',
-    '/categories'
+    '/shared_account_list',
+    '/category_list'
   ];
 
   UserActions(this.user);

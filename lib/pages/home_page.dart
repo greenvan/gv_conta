@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         leading: Icon(Icons.group_work),
         title: Text(
-          'GVConta',
+          'Tala cuentas',
         ), //TODO Text(labels.app.name),
         actions: <Widget>[
           //TODO: Añadir un about us.

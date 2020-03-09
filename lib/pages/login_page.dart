@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/system/auth_provider.dart';
 
+class NameFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? 'Name can\'t be empty' : null;
+  }
+}
+
 class EmailFieldValidator {
   static String validate(String value) {
     return value.isEmpty ? 'Email can\'t be empty' : null;
@@ -31,6 +37,9 @@ class _LoginPageState extends State<LoginPage> {
 
   bool validateAndSave() {
     final form = formKey.currentState;
+
+//TODO: si es modo register, validar si los dos passwords son iguales
+
     if (form.validate()) {
       form.save();
       return true;
@@ -57,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
         }
       } catch (e) {
         print('Error: $e');
-        // TODO: Tratar los errores:
+        // TODO: Tratar los errores: Poner una snack bar por ejemplo o un Toast
         // Por ejemplo, al crear un usuario:
         //- ERROR_WEAK_PASSWORD
         // O al hacer sign in o crear el usuario
@@ -101,15 +110,42 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   List<Widget> buildInputs() {
+    if (_formType == FormType.register)
+      return [
+        TextFormField(
+          decoration: InputDecoration(labelText: 'Name'),
+          validator: NameFieldValidator.validate,
+          onSaved: (value) => _email = value,
+        ),
+        TextFormField(
+          decoration: InputDecoration(labelText: 'Email'),
+          // inputFormatters: [widget.inputFormatter],
+          validator: EmailFieldValidator.validate,
+          onSaved: (value) => _email = value,
+        ),
+        TextFormField(
+          decoration: InputDecoration(labelText: 'Password'),
+          validator: PasswordFieldValidator.validate,
+          onSaved: (value) => _password = value,
+          obscureText: true,
+        ),
+        TextFormField(
+          decoration: InputDecoration(labelText: 'Repeat Password'),
+          validator: PasswordFieldValidator.validate,
+          onSaved: (value) => _password = value,
+          obscureText: true,
+        ),
+      ];
+
     return [
       TextFormField(
         decoration: InputDecoration(labelText: 'Email'),
-        validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+        validator: EmailFieldValidator.validate,
         onSaved: (value) => _email = value,
       ),
       TextFormField(
         decoration: InputDecoration(labelText: 'Password'),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+        validator: PasswordFieldValidator.validate,
         onSaved: (value) => _password = value,
         obscureText: true,
       ),

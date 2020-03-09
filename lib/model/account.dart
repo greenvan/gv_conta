@@ -23,6 +23,19 @@ class Account {
         name = doc.data['name'],
         image = doc.data['name'],
         owner = doc.data['name']; //TODO Roleplay y listas
+
+//Para poder guardarlo directamente
+  Map<String, dynamic> toFirestore() =>
+      {'name': this.name, 'image': this.image, 'owner': this.owner};
+
+  Account(String name) {
+    this.name = name;
+  }
+
+  @override
+  String toString() {
+    return this.name;
+  }
 }
 
 List<Account> toAccountList(QuerySnapshot query) {

@@ -45,6 +45,7 @@ class EditProfilePage extends StatelessWidget {
                       //TODO: Comprobar que el texto es correcto (no vacío)??
                       user.name = _controller.text;
                       //TODO: guardar en la base de datos
+                      db.updateUserName(user);
 
                       Navigator.of(context).pop();
                     },

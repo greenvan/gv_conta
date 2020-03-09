@@ -11,6 +11,11 @@ class User {
         name = doc.data['name'],
         email = doc.data['email'],
         image = doc.data['image'];
+
+  @override
+  String toString() {
+    return this.name;
+  }
 }
 
 User toUser(DocumentSnapshot doc) {
