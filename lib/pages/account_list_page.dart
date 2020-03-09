@@ -4,6 +4,7 @@ import 'package:gvconta/model/user.dart';
 import 'package:gvconta/system/db.dart' as db;
 import 'package:gvconta/widgets/account_list.dart';
 import 'package:gvconta/widgets/loading.dart';
+import 'package:gvconta/widgets/navigation_arguments.dart';
 import 'package:gvconta/widgets/red_error.dart';
 
 class AccountListPage extends StatelessWidget {
@@ -33,6 +34,14 @@ class AccountListPage extends StatelessWidget {
           }
 
           return AccountList(accounts: snapshot.data);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        foregroundColor: Colors.white,
+        onPressed: () {
+          Navigator.of(context).pushNamed('/edit_account',
+              arguments: NavigationArguments(user: user));
         },
       ),
     );

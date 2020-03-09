@@ -38,7 +38,6 @@ class HomeButton extends StatelessWidget {
           textColor: Colors.white70,
           elevation: 12,
           onPressed: () {
-            print('Raised button pressed by uid');
             Navigator.of(context).pushNamed(route, arguments: arguments);
           },
         ),

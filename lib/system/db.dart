@@ -40,6 +40,12 @@ Stream<List<Account>> getAccountList(String uid) {
       .map(toAccountList);
 }
 
+Future<void> updateUser(User user) async {
+  /* await Firestore.instance
+      .document('users/${user.uid}/')
+      .updateData();*/
+}
+
 /*
 import 'model/group.dart';
 import 'model/message.dart';

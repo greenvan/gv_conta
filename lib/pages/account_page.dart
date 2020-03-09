@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/account.dart';
+import 'package:gvconta/widgets/navigation_arguments.dart';
 
 class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Account account = ModalRoute.of(context).settings.arguments;
+    NavigationArguments args = ModalRoute.of(context).settings.arguments;
+    final Account account = args.account;
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(

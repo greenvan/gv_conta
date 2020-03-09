@@ -46,8 +46,8 @@ class UserCard extends StatelessWidget {
                 icon: Icon(Icons.edit,
                     color: Theme.of(context).primaryColorLight),
                 onPressed: () {
-                  print(
-                      'button pressed'); //TODO : añadir la lógica para editar el perfil
+                  Navigator.of(context)
+                      .pushNamed('/edit_profile', arguments: user);
                 }),
             isThreeLine: true,
           ),
