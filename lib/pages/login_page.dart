@@ -9,13 +9,23 @@ class NameFieldValidator {
 
 class EmailFieldValidator {
   static String validate(String value) {
-    return value.isEmpty ? 'Email can\'t be empty' : null;
+    String emailValue = value.trim();
+
+    if (emailValue.isEmpty) return 'Email can\'t be empty';
+
+    Pattern pattern = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-]+\$)";
+    final regex = RegExp(pattern);
+    if (!regex.hasMatch(emailValue)) return 'Enter a valid email';
+
+    return null;
   }
 }
 
 class PasswordFieldValidator {
   static String validate(String value) {
-    return value.isEmpty ? 'Password can\'t be empty' : null;
+    if (value.isEmpty) return 'Password can\'t be empty';
+    if (value.length < 8) return 'Password should have at least 8 characters';
+    return null;
   }
 }
 
@@ -31,14 +41,13 @@ enum FormType {
 
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
+  final passKey = GlobalKey<FormFieldState>();
 
-  String _email, _password;
+  String _name, _email, _password, _password2;
   FormType _formType = FormType.login;
 
   bool validateAndSave() {
     final form = formKey.currentState;
-
-//TODO: si es modo register, validar si los dos passwords son iguales
 
     if (form.validate()) {
       form.save();
@@ -51,8 +60,7 @@ class _LoginPageState extends State<LoginPage> {
     if (validateAndSave()) {
       try {
         var auth = AuthProvider.of(context).auth;
-        // TODO Para asegurarnos de que quita el espacio utilizar lo siguiente
-        //_email.toString().trim()
+
         if (_formType == FormType.login) {
           String userId =
               await auth.signInWithEmailAndPassword(_email, _password);
@@ -115,15 +123,17 @@ class _LoginPageState extends State<LoginPage> {
         TextFormField(
           decoration: InputDecoration(labelText: 'Name'),
           validator: NameFieldValidator.validate,
-          onSaved: (value) => _email = value,
+          onSaved: (value) => _name = value,
         ),
         TextFormField(
-          decoration: InputDecoration(labelText: 'Email'),
-          // inputFormatters: [widget.inputFormatter],
+          decoration:
+              InputDecoration(labelText: 'Email', hintText: 'test@test.com'),
+          keyboardType: TextInputType.emailAddress,
           validator: EmailFieldValidator.validate,
-          onSaved: (value) => _email = value,
+          onSaved: (value) => _email = value.trim(),
         ),
         TextFormField(
+          key: passKey,
           decoration: InputDecoration(labelText: 'Password'),
           validator: PasswordFieldValidator.validate,
           onSaved: (value) => _password = value,
@@ -131,17 +141,22 @@ class _LoginPageState extends State<LoginPage> {
         ),
         TextFormField(
           decoration: InputDecoration(labelText: 'Repeat Password'),
-          validator: PasswordFieldValidator.validate,
-          onSaved: (value) => _password = value,
+          validator: (value) {
+            var password = passKey.currentState.value;
+            return (password == value) ? null : 'Passwords do not match';
+          },
+          onSaved: (value) => _password2 = value,
           obscureText: true,
         ),
       ];
 
     return [
       TextFormField(
-        decoration: InputDecoration(labelText: 'Email'),
+        decoration:
+            InputDecoration(labelText: 'Email', hintText: 'test@test.com'),
         validator: EmailFieldValidator.validate,
-        onSaved: (value) => _email = value,
+        keyboardType: TextInputType.emailAddress,
+        onSaved: (value) => _email = value.trim(),
       ),
       TextFormField(
         decoration: InputDecoration(labelText: 'Password'),
