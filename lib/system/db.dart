@@ -60,6 +60,13 @@ Future<void> addAccount(User user, Account account) async {
       .add(account.toFirestore());
 }
 
+Future<void> addUser(User user) async {
+  await Firestore.instance
+      .collection('users')
+      .document(user.uid)
+      .setData(user.toFirestore());
+}
+
 /*
 import 'model/group.dart';
 import 'model/message.dart';

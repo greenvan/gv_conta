@@ -20,7 +20,7 @@ class DiaryPage extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Eventos:' + account.name),
+        title: Text('Diario:' + account.name),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

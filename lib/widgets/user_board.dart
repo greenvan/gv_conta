@@ -43,7 +43,7 @@ class UserActions extends StatelessWidget {
 
   final List<Icon> _userActionIcons = [
     Icon(Icons.account_balance),
-    Icon(Icons.account_balance_wallet),
+    Icon(Icons.share),
     Icon(Icons.category)
   ];
 

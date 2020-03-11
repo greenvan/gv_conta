@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gvconta/model/user.dart';
 import 'package:gvconta/system/auth_provider.dart';
+import 'package:gvconta/system/db.dart' as db;
 
 class NameFieldValidator {
   static String validate(String value) {
@@ -69,6 +71,8 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           String userId =
               await auth.createUserWithEmailAndPassword(_email, _password);
+
+          db.addUser(User(uid: userId, name: _name, email: _email));
 
           print('User created: $userId');
         }
