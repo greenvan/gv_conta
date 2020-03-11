@@ -143,6 +143,7 @@ class _DynamicTreeViewOriState extends State<DynamicTreeView> {
             "${k.getTitle()}",
             style: widget.config.childrenTextStyle,
           ),
+          leading: Icon(Icons.arrow_right),
         ));
       }
     }
@@ -311,7 +312,7 @@ class _ParentWidgetState extends State<ParentWidget>
           title: Text(widget.baseData.getTitle(),
               style: widget.config.parentTextStyle),
           contentPadding: widget.config.parentPaddingEdgeInsets,
-          trailing: IconButton(
+          leading: IconButton(
             onPressed: () {
               setState(() {
                 shouldExpand = !shouldExpand;
@@ -327,6 +328,7 @@ class _ParentWidgetState extends State<ParentWidget>
               child: widget.config.arrowIcon,
             ),
           ),
+          // trailing: widget.trailing,
         ),
         ChildWidget(
           children: widget.children,

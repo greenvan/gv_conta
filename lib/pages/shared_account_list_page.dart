@@ -17,11 +17,23 @@ class SharedAccountListPage extends StatelessWidget {
             user.name,
           ),
         ),
-        body: Container(
-          child: Text(
-              'Esta es la página en la que se mostrarán las cuentas compartidas pertenecientes a otros usuarios' +
-                  '\nPara el usuario: ' +
-                  user.name),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Text(
+                    'No existen cuentas de otros usuarios compartidas contigo: ' +
+                        user.name),
+              ),
+              RaisedButton(
+                child: Text('Aceptar'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          ),
         ));
   }
 }

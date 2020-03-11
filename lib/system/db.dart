@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/account.dart';
+import 'package:gvconta/model/category.dart';
 import 'package:gvconta/model/user.dart';
 
 import 'auth_provider.dart';
@@ -65,6 +66,32 @@ Future<void> addUser(User user) async {
       .collection('users')
       .document(user.uid)
       .setData(user.toFirestore());
+}
+
+Stream<List<Category>> getExpenseList(String uid) {
+  return Firestore.instance
+      .collection('users/$uid/expenses')
+      .snapshots()
+      .map(toCategoryList);
+}
+
+Future<void> addExpense(User user, Category expense) async {
+  await Firestore.instance
+      .collection('users/${user.uid}/expenses')
+      .add(expense.toFirestore());
+}
+
+Future<void> addIncome(User user, Category income) async {
+  await Firestore.instance
+      .collection('users/${user.uid}/incomes')
+      .add(income.toFirestore());
+}
+
+Stream<List<Category>> getIncomeList(String uid) {
+  return Firestore.instance
+      .collection('users/$uid/incomes')
+      .snapshots()
+      .map(toCategoryList);
 }
 
 /*
