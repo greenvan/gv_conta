@@ -5,15 +5,14 @@ import 'package:gvconta/system/db.dart' as db;
 import 'package:gvconta/system/user_provider.dart';
 
 class CategoryBanner extends StatelessWidget {
-  final String title;
+  final String title, type;
   final User user;
-  bool isExpense = true;
+
   TextEditingController _textFieldController = TextEditingController();
 
   //Hay que añadir una función como método.
 
-  CategoryBanner({Key key, this.title, this.isExpense, this.user})
-      : super(key: key);
+  CategoryBanner({Key key, this.title, this.type, this.user}) : super(key: key);
 
   _displayDialog(BuildContext context) async {
     return showDialog(
@@ -29,9 +28,11 @@ class CategoryBanner extends StatelessWidget {
               new FlatButton(
                 child: new Text('AÑADIR'),
                 onPressed: () {
-                  Category newCategory =
-                      Category(name: _textFieldController.text, parentId: '1');
-                  if (isExpense) {
+                  Category newCategory = Category(
+                      name: _textFieldController.text,
+                      parentId: '1',
+                      extras: {'type': type});
+                  if (type == 'expenses') {
                     db.addExpense(user, newCategory);
                   } else {
                     db.addIncome(user, newCategory);

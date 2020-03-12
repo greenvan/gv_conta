@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 ///Callback when child/parent is tapped . Map data will contain {String 'id',String 'parent_id',String 'title',Map 'extra'}
 
 typedef OnTap = Function(Map data);
+typedef OnPressed = Function(Map data);
 
 ///A tree view that supports indefinite category/subcategory lists with horizontal and vertical scrolling
 class DynamicTreeView extends StatefulWidget {
@@ -31,6 +32,9 @@ class DynamicTreeView extends StatefulWidget {
   ///Map will contain the following keys :
   ///id , parent_id , title , extra
   final OnTap onTap;
+  final OnPressed onAddPressed;
+  final OnPressed onEditPressed;
+  final OnPressed onDeletePressed;
 
   ///The width of DynamicTreeView
   final double width;
@@ -41,6 +45,9 @@ class DynamicTreeView extends StatefulWidget {
     @required this.data,
     this.config = const Config(),
     this.onTap,
+    this.onAddPressed,
+    this.onEditPressed,
+    this.onDeletePressed,
     this.width = 220.0,
   }) : assert(data != null);
 
@@ -106,6 +113,9 @@ class _DynamicTreeViewOriState extends State<DynamicTreeView> {
     var p = ParentWidget(
       baseData: d,
       onTap: widget.onTap,
+      onAddPressed: widget.onAddPressed,
+      onEditPressed: widget.onEditPressed,
+      onDeletePressed: widget.onDeletePressed,
       config: widget.config,
       children: _buildChildren(data),
       key: ObjectKey({
@@ -129,22 +139,62 @@ class _DynamicTreeViewOriState extends State<DynamicTreeView> {
             .getTitle();
         cW.add(buildWidget(k.getId(), name));
       } else {
-        cW.add(ListTile(
-          onTap: () {
-            widget?.onTap({
-              'id': '${k.getId()}',
-              'parent_id': '${k.getParentId()}',
-              'title': '${k.getTitle()}',
-              'extra': '${k.getExtraData()}'
-            });
-          },
-          contentPadding: widget.config.childrenPaddingEdgeInsets,
-          title: Text(
-            "${k.getTitle()}",
-            style: widget.config.childrenTextStyle,
+        cW.add(
+          ListTile(
+            onTap: () {
+              widget?.onTap({
+                'id': '${k.getId()}',
+                'parent_id': '${k.getParentId()}',
+                'title': '${k.getTitle()}',
+                'extra': '${k.getExtraData()}'
+              });
+            },
+            contentPadding: widget.config.childrenPaddingEdgeInsets,
+            title: Text(
+              "${k.getTitle()}",
+              style: widget.config.childrenTextStyle,
+            ),
+            leading: Icon(Icons.arrow_right),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                if (widget.config.showAddIconButton)
+                  IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        widget?.onAddPressed({
+                          'id': '${k.getId()}',
+                          'parent_id': '${k.getParentId()}',
+                          'title': '${k.getTitle()}',
+                          'extra': k.getExtraData()
+                        });
+                      }),
+                if (widget.config.showEditIconButton)
+                  IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        widget?.onEditPressed({
+                          'id': '${k.getId()}',
+                          'parent_id': '${k.getParentId()}',
+                          'title': '${k.getTitle()}',
+                          'extra': k.getExtraData()
+                        });
+                      }),
+                if (widget.config.showDeleteIconButton)
+                  IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        widget?.onDeletePressed({
+                          'id': '${k.getId()}',
+                          'parent_id': '${k.getParentId()}',
+                          'title': '${k.getTitle()}',
+                          'extra': k.getExtraData()
+                        });
+                      }),
+              ],
+            ),
           ),
-          leading: Icon(Icons.arrow_right),
-        ));
+        );
       }
     }
     return cW;
@@ -254,9 +304,16 @@ class ParentWidget extends StatefulWidget {
   final BaseData baseData;
   final Config config;
   final OnTap onTap;
+  final OnPressed onAddPressed;
+  final OnPressed onEditPressed;
+  final OnPressed onDeletePressed;
+
   ParentWidget({
     this.baseData,
     this.onTap,
+    this.onAddPressed,
+    this.onEditPressed,
+    this.onDeletePressed,
     this.children,
     this.config,
     Key key,
@@ -328,7 +385,48 @@ class _ParentWidgetState extends State<ParentWidget>
               child: widget.config.arrowIcon,
             ),
           ),
-          // trailing: widget.trailing,
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              if (widget.config.showAddIconButton)
+                IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    var map = Map<String, dynamic>();
+                    map['id'] = widget.baseData.getId();
+                    map['parent_id'] = widget.baseData.getParentId();
+                    map['title'] = widget.baseData.getTitle();
+                    map['extra'] = widget.baseData.getExtraData();
+                    if (widget.onAddPressed != null) widget.onAddPressed(map);
+                  },
+                ),
+              if (widget.config.showEditIconButton)
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    var map = Map<String, dynamic>();
+                    map['id'] = widget.baseData.getId();
+                    map['parent_id'] = widget.baseData.getParentId();
+                    map['title'] = widget.baseData.getTitle();
+                    map['extra'] = widget.baseData.getExtraData();
+                    if (widget.onEditPressed != null) widget.onEditPressed(map);
+                  },
+                ),
+              if (widget.config.showDeleteIconButton)
+                IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
+                    var map = Map<String, dynamic>();
+                    map['id'] = widget.baseData.getId();
+                    map['parent_id'] = widget.baseData.getParentId();
+                    map['title'] = widget.baseData.getTitle();
+                    map['extra'] = widget.baseData.getExtraData();
+                    if (widget.onDeletePressed != null)
+                      widget.onDeletePressed(map);
+                  },
+                ),
+            ],
+          ),
         ),
         ChildWidget(
           children: widget.children,
@@ -392,13 +490,22 @@ class Config {
   ///Default is 1
   final String rootId;
 
-  const Config(
-      {this.parentTextStyle =
-          const TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-      this.parentPaddingEdgeInsets = const EdgeInsets.all(6.0),
-      this.childrenTextStyle = const TextStyle(color: Colors.black),
-      this.childrenPaddingEdgeInsets =
-          const EdgeInsets.only(left: 15.0, top: 0, bottom: 0),
-      this.rootId = "1",
-      this.arrowIcon = const Icon(Icons.keyboard_arrow_down)});
+  //Add configuration for showing or not showing Trailing IconButtons
+  final bool showAddIconButton;
+  final bool showEditIconButton;
+  final bool showDeleteIconButton;
+
+  const Config({
+    this.parentTextStyle =
+        const TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+    this.parentPaddingEdgeInsets = const EdgeInsets.all(6.0),
+    this.childrenTextStyle = const TextStyle(color: Colors.black),
+    this.childrenPaddingEdgeInsets =
+        const EdgeInsets.only(left: 15.0, top: 0, bottom: 0),
+    this.rootId = "1",
+    this.arrowIcon = const Icon(Icons.keyboard_arrow_down),
+    this.showAddIconButton = true,
+    this.showEditIconButton = true,
+    this.showDeleteIconButton = true,
+  });
 }

@@ -67,12 +67,27 @@ Future<void> addUser(User user) async {
       .document(user.uid)
       .setData(user.toFirestore());
 }
-
+/*
 Stream<List<Category>> getExpenseList(String uid) {
   return Firestore.instance
       .collection('users/$uid/expenses')
       .snapshots()
       .map(toCategoryList);
+}*/
+
+Stream<List<Category>> getExpenseList(String uid) {
+  return Firestore.instance
+      .collection('users/$uid/expenses')
+      .orderBy('name', descending: false) //TODO: not working???
+      .snapshots()
+      .map(toExpenseList);
+}
+
+Stream<List<Category>> getIncomeList(String uid) {
+  return Firestore.instance
+      .collection('users/$uid/incomes')
+      .snapshots()
+      .map(toIncomeList);
 }
 
 Future<void> addExpense(User user, Category expense) async {
@@ -87,11 +102,23 @@ Future<void> addIncome(User user, Category income) async {
       .add(income.toFirestore());
 }
 
-Stream<List<Category>> getIncomeList(String uid) {
-  return Firestore.instance
-      .collection('users/$uid/incomes')
-      .snapshots()
-      .map(toCategoryList);
+Future<void> updateCategoryName(User user, Category category) async {
+  String type = category.extras['type'];
+
+  Map<String, dynamic> values = new Map<String, dynamic>();
+  values["name"] = category.name;
+
+  await Firestore.instance
+      .document('users/${user.uid}/$type/${category.id}')
+      .updateData(values);
+}
+
+Future<void> deleteCategory(User user, Category category) async {
+  String type = category.extras['type'];
+
+  await Firestore.instance
+      .document('users/${user.uid}/$type/${category.id}')
+      .delete();
 }
 
 /*

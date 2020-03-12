@@ -9,6 +9,8 @@ class Category implements BaseData {
 
   ///Any extra data you want to get when tapped on children
   Map<String, dynamic> extras;
+  //uid = userID
+  //type = expenses/incomes
 
   Category({this.id, this.parentId, this.name, this.extras});
   @override
@@ -46,4 +48,22 @@ class Category implements BaseData {
 List<Category> toCategoryList(QuerySnapshot query) {
   //Paso la lista de QuerySnapshot a Category
   return query.documents.map((doc) => Category.fromFirestore(doc)).toList();
+}
+
+List<Category> toExpenseList(QuerySnapshot query) {
+  //Paso la lista de QuerySnapshot a Category
+  return query.documents.map((doc) {
+    Category expense = Category.fromFirestore(doc);
+    expense.extras = {'type': 'expenses'};
+    return expense;
+  }).toList();
+}
+
+List<Category> toIncomeList(QuerySnapshot query) {
+  //Paso la lista de QuerySnapshot a Category
+  return query.documents.map((doc) {
+    Category expense = Category.fromFirestore(doc);
+    expense.extras = {'type': 'incomes'};
+    return expense;
+  }).toList();
 }
