@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gvconta/model/user.dart';
 import 'package:gvconta/system/auth_provider.dart';
 import 'package:gvconta/system/db.dart' as db;
+import 'package:gvconta/system/i18n.dart';
 
 class NameFieldValidator {
-  static String validate(String value) {
-    return value.isEmpty ? 'Name can\'t be empty' : null;
+  static String validate(String value, {String label}) {
+    if (label == null || label.isEmpty) label = 'Name can\'t be empty';
+
+    return value.isEmpty ? label : null;
   }
 }
 
@@ -105,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: Text(I18n.of(context).loginAppBar),
       ),
       body: Container(
         padding: EdgeInsets.all(16),
@@ -122,32 +125,34 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   List<Widget> buildInputs() {
+    var labels = I18n.of(context);
     if (_formType == FormType.register)
       return [
         TextFormField(
-          decoration: InputDecoration(labelText: 'Name'),
-          validator: NameFieldValidator.validate,
+          decoration: InputDecoration(labelText: labels.name),
+          validator: (value) =>
+              NameFieldValidator.validate(value, label: labels.noEmpty),
           onSaved: (value) => _name = value,
         ),
         TextFormField(
-          decoration:
-              InputDecoration(labelText: 'Email', hintText: 'test@test.com'),
+          decoration: InputDecoration(
+              labelText: labels.email, hintText: 'test@test.com'),
           keyboardType: TextInputType.emailAddress,
           validator: EmailFieldValidator.validate,
           onSaved: (value) => _email = value.trim(),
         ),
         TextFormField(
           key: passKey,
-          decoration: InputDecoration(labelText: 'Password'),
+          decoration: InputDecoration(labelText: labels.password),
           validator: PasswordFieldValidator.validate,
           onSaved: (value) => _password = value,
           obscureText: true,
         ),
         TextFormField(
-          decoration: InputDecoration(labelText: 'Repeat Password'),
+          decoration: InputDecoration(labelText: labels.repeatPassword),
           validator: (value) {
             var password = passKey.currentState.value;
-            return (password == value) ? null : 'Passwords do not match';
+            return (password == value) ? null : labels.passNoMatch;
           },
           onSaved: (value) => _password2 = value,
           obscureText: true,
@@ -157,13 +162,13 @@ class _LoginPageState extends State<LoginPage> {
     return [
       TextFormField(
         decoration:
-            InputDecoration(labelText: 'Email', hintText: 'test@test.com'),
+            InputDecoration(labelText: labels.email, hintText: 'test@test.com'),
         validator: EmailFieldValidator.validate,
         keyboardType: TextInputType.emailAddress,
         onSaved: (value) => _email = value.trim(),
       ),
       TextFormField(
-        decoration: InputDecoration(labelText: 'Password'),
+        decoration: InputDecoration(labelText: labels.password),
         validator: PasswordFieldValidator.validate,
         onSaved: (value) => _password = value,
         obscureText: true,
@@ -172,18 +177,19 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   List<Widget> buildSubmitButtons() {
+    var labels = I18n.of(context);
     bool _login = false;
     if (_formType == FormType.login) _login = true;
 
     return [
       RaisedButton(
-        child: Text((_login) ? 'Login' : 'Create an account',
+        child: Text((_login) ? labels.login : labels.createAccount,
             style: TextStyle(fontSize: 20)),
         onPressed: validateAndSubmit,
       ),
       FlatButton(
         child: Text(
-          (_login) ? 'Create an account' : 'Have an account? Log in',
+          (_login) ? labels.createAccount : labels.alreadyAnAccount,
           style: TextStyle(fontSize: 20),
         ),
         onPressed: (_login) ? moveToRegister : moveToLogin,

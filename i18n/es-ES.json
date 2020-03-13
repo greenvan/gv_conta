@@ -1,0 +1,16 @@
+{
+    "appName": "Tala cuentas",
+    "loginAppBar": "Inicie sesión",
+    "name": "Nombre",
+    "email": "Email",
+    "password": "Contraseña",
+    "repeatPassword": "Repita la contraseña",
+    "login": "Iniciar sesión",
+    "createAccount": "Crear una nueva cuenta",
+    "alreadyAnAccount": "¿Ya tienes una cuenta? Inicia sesión aquí",
+    "passNoMatch": "Las contraseñas no coinciden",
+    "noEmpty": "No puede dejar este campo en blanco",
+    "enterValidEmail": "Introduzca un e-mail válido",
+    "enterValidPass": "La contraseña debe tener como mínimo 8 caracteres",
+    "greetTo": "Hola {name}"
+}

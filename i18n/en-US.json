@@ -1,0 +1,16 @@
+{
+    "appName": "GV Conta",
+    "loginAppBar": "Login Page",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "repeatPassword": "Retype Password",
+    "login": "Login",
+    "createAccount": "Create an account",
+    "alreadyAnAccount": "Have an account? Log in",
+    "passNoMatch": "Passwords do not match",
+    "noEmpty": "This field can't be empty",
+    "enterValidEmail": "Introduzca un e-mail válido",
+    "enterValidPass": "La contraseña debe tener como mínimo 8 caracteres",
+    "greetTo": "Hello {name}"
+}
