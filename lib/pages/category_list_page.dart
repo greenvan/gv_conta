@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/category.dart';
 import 'package:gvconta/model/user.dart';
+import 'package:gvconta/system/i18n.dart';
 import 'package:gvconta/system/user_provider.dart';
 import 'package:gvconta/widgets/category_banner.dart';
 import 'package:gvconta/widgets/dynamic_treeview.dart';
@@ -13,6 +14,8 @@ class CategoryListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final User user = ModalRoute.of(context).settings.arguments;
 
+    var labels = I18n.of(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -21,16 +24,18 @@ class CategoryListPage extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Categorias: ' + user.name),
+        title: Text(labels.categories + ': ' + user.name),
       ),
       body: SingleChildScrollView(
         child: UserProvider(
           user: user,
           child: Column(
             children: <Widget>[
-              CategoryBanner(title: 'Gastos', type: 'expenses', user: user),
+              CategoryBanner(
+                  title: labels.expenses, type: 'expenses', user: user),
               _buildCategoryStreamBuilder(db.getExpenseList(user.uid)),
-              CategoryBanner(title: 'Ingresos', type: 'incomes', user: user),
+              CategoryBanner(
+                  title: labels.incomes, type: 'incomes', user: user),
               _buildCategoryStreamBuilder(db.getIncomeList(user.uid)),
             ],
           ),
@@ -41,9 +46,10 @@ class CategoryListPage extends StatelessWidget {
 
   StreamBuilder<List<Category>> _buildCategoryStreamBuilder(
       Stream<List<Category>> categoryStream) {
-    categoryStream.listen((onData) {
+    /* categoryStream.listen((onData) {
       print('Something happened');
-    });
+      print(onData);
+    });*/
     return StreamBuilder(
       stream: categoryStream,
       builder: (context, AsyncSnapshot<List<Category>> snapshot) {
@@ -86,7 +92,7 @@ class CategoryListPage extends StatelessWidget {
                 extras: m['extra'], //mismos extras que el padre
               ),
               user: UserProvider.of(context).user,
-              title: 'Añadir nueva categoría',
+              title: I18n.of(context).addCategory,
             );
           },
 
@@ -100,7 +106,7 @@ class CategoryListPage extends StatelessWidget {
                 extras: m['extra'],
               ),
               user: UserProvider.of(context).user,
-              title: 'Editar categoría',
+              title: I18n.of(context).editCategory,
             );
           },
           onDeletePressed: (m) {
@@ -113,7 +119,7 @@ class CategoryListPage extends StatelessWidget {
                 extras: m['extra'],
               ),
               user: UserProvider.of(context).user,
-              title: 'Editar categoría',
+              title: I18n.of(context).deleteCategory,
             );
           },
           width: MediaQuery.of(context).size.width,
@@ -184,11 +190,12 @@ displayAddDialog(
           title: Text(title),
           content: TextField(
             controller: _textFieldController,
-            decoration: InputDecoration(hintText: "Introduzca el nombre: "),
+            decoration:
+                InputDecoration(hintText: I18n.of(context).enterName + ": "),
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text('AÑADIR'),
+              child: new Text(I18n.of(context).ADD),
               onPressed: () {
                 category.name = _textFieldController.text;
 
@@ -201,7 +208,7 @@ displayAddDialog(
               },
             ),
             new FlatButton(
-              child: new Text('CANCELAR'),
+              child: new Text(I18n.of(context).CANCEL),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -222,11 +229,12 @@ displayEditDialog(
           title: Text(title),
           content: TextField(
             controller: _textFieldController,
-            decoration: InputDecoration(hintText: "Introduzca el nombre: "),
+            decoration:
+                InputDecoration(hintText: I18n.of(context).enterName + ": "),
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text('EDITAR'),
+              child: new Text(I18n.of(context).EDIT),
               onPressed: () {
                 category.name =
                     _textFieldController.text; //Debe tener como extras type
@@ -236,7 +244,7 @@ displayEditDialog(
               },
             ),
             new FlatButton(
-              child: new Text('CANCELAR'),
+              child: new Text(I18n.of(context).CANCEL),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -253,11 +261,10 @@ displayDeleteDialog(
       builder: (context) {
         return AlertDialog(
           title: Text(title),
-          content: Text(
-              '¿Seguro que desea borrar la categoría? Esta acción no puede deshacerse'),
+          content: Text(I18n.of(context).confirmDeleteCategory),
           actions: <Widget>[
             new FlatButton(
-              child: new Text('BORRAR'),
+              child: new Text(I18n.of(context).DELETE),
               onPressed: () {
                 //TODO: no permitir la eliminación si tiene hijos
 
@@ -266,7 +273,7 @@ displayDeleteDialog(
               },
             ),
             new FlatButton(
-              child: new Text('CANCELAR'),
+              child: new Text(I18n.of(context).CANCEL),
               onPressed: () {
                 Navigator.of(context).pop();
               },

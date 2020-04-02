@@ -12,5 +12,18 @@
     "noEmpty": "No puede dejar este campo en blanco",
     "enterValidEmail": "Introduzca un e-mail válido",
     "enterValidPass": "La contraseña debe tener como mínimo 8 caracteres",
-    "greetTo": "Hola {name}"
+    "greetTo": "Hola {name}",
+    "categories": "Categorias",
+    "expenses": "Gastos",
+    "incomes": "Ingresos",
+    "addCategory": "Añadir nueva categoría",
+    "editCategory": "Editar categoría",
+    "deleteCategory": "Borrar categoría",
+    "enterName": "Introduzca el nombre",
+    "ADD": "AÑADIR",
+    "EDIT": "EDITAR",
+    "DELETE": "BORRAR",
+    "CANCEL": "CANCELAR",
+    "confirmDeleteCategory": "¿Seguro que desea borrar la categoría? Esta acción no puede deshacerse",
+    "addElementTo": "'Añadir elemento en: {parent}"
 }

@@ -12,5 +12,18 @@
     "noEmpty": "This field can't be empty",
     "enterValidEmail": "Introduzca un e-mail válido",
     "enterValidPass": "La contraseña debe tener como mínimo 8 caracteres",
-    "greetTo": "Hello {name}"
+    "greetTo": "Hello {name}",
+    "categories": "Categories",
+    "expenses": "Expenses",
+    "incomes": "Incomes",
+    "addCategory": "Add new Category",
+    "editCategory": "Edit Category",
+    "deleteCategory": "Delete Category",
+    "enterName": "Enter the name",
+    "ADD": "ADD",
+    "EDIT": "EDIT",
+    "DELETE": "DELETE",
+    "CANCEL": "CANCEL",
+    "confirmDeleteCategory": "Are you sure you want to delete the category? This cannot be undone.",
+    "addElementTo": "Add element to {parent} list"
 }

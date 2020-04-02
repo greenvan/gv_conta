@@ -6,7 +6,8 @@ import 'package:gvconta/system/i18n.dart';
 
 class NameFieldValidator {
   static String validate(String value, {String label}) {
-    if (label == null || label.isEmpty) label = 'Name can\'t be empty';
+    if (label == null || label.isEmpty)
+      label = 'labels.noEmpty'; //'Name can\'t be empty';
 
     return value.isEmpty ? label : null;
   }

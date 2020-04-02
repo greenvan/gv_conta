@@ -60,6 +60,32 @@ class I18n implements WidgetsLocalizations {
   String get enterValidPass => "La contraseña debe tener como mínimo 8 caracteres";
   /// "Hello ${name}"
   String greetTo(String name) => "Hello ${name}";
+  /// "Categories"
+  String get categories => "Categories";
+  /// "Expenses"
+  String get expenses => "Expenses";
+  /// "Incomes"
+  String get incomes => "Incomes";
+  /// "Add new Category"
+  String get addCategory => "Add new Category";
+  /// "Edit Category"
+  String get editCategory => "Edit Category";
+  /// "Delete Category"
+  String get deleteCategory => "Delete Category";
+  /// "Enter the name"
+  String get enterName => "Enter the name";
+  /// "ADD"
+  String get ADD => "ADD";
+  /// "EDIT"
+  String get EDIT => "EDIT";
+  /// "DELETE"
+  String get DELETE => "DELETE";
+  /// "CANCEL"
+  String get CANCEL => "CANCEL";
+  /// "Are you sure you want to delete the category? This cannot be undone."
+  String get confirmDeleteCategory => "Are you sure you want to delete the category? This cannot be undone.";
+  /// "Add element to ${parent} list"
+  String addElementTo(String parent) => "Add element to ${parent} list";
 }
 
 class _I18n_en_US extends I18n {
@@ -114,6 +140,45 @@ class _I18n_es_ES extends I18n {
   /// "Hola ${name}"
   @override
   String greetTo(String name) => "Hola ${name}";
+  /// "Categorias"
+  @override
+  String get categories => "Categorias";
+  /// "Gastos"
+  @override
+  String get expenses => "Gastos";
+  /// "Ingresos"
+  @override
+  String get incomes => "Ingresos";
+  /// "Añadir nueva categoría"
+  @override
+  String get addCategory => "Añadir nueva categoría";
+  /// "Editar categoría"
+  @override
+  String get editCategory => "Editar categoría";
+  /// "Borrar categoría"
+  @override
+  String get deleteCategory => "Borrar categoría";
+  /// "Introduzca el nombre"
+  @override
+  String get enterName => "Introduzca el nombre";
+  /// "AÑADIR"
+  @override
+  String get ADD => "AÑADIR";
+  /// "EDITAR"
+  @override
+  String get EDIT => "EDITAR";
+  /// "BORRAR"
+  @override
+  String get DELETE => "BORRAR";
+  /// "CANCELAR"
+  @override
+  String get CANCEL => "CANCELAR";
+  /// "¿Seguro que desea borrar la categoría? Esta acción no puede deshacerse"
+  @override
+  String get confirmDeleteCategory => "¿Seguro que desea borrar la categoría? Esta acción no puede deshacerse";
+  /// "'Añadir elemento en: ${parent}"
+  @override
+  String addElementTo(String parent) => "'Añadir elemento en: ${parent}";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

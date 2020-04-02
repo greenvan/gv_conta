@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gvconta/model/category.dart';
 import 'package:gvconta/model/user.dart';
 import 'package:gvconta/system/db.dart' as db;
+import 'package:gvconta/system/i18n.dart';
 import 'package:gvconta/system/user_provider.dart';
 
 class CategoryBanner extends StatelessWidget {
@@ -19,14 +20,15 @@ class CategoryBanner extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Añadir elemento en: ' + this.title),
+            title: Text(I18n.of(context).addElementTo(this.title)),
             content: TextField(
               controller: _textFieldController,
-              decoration: InputDecoration(hintText: "Introduzca el nombre: "),
+              decoration:
+                  InputDecoration(hintText: I18n.of(context).enterName + ": "),
             ),
             actions: <Widget>[
               new FlatButton(
-                child: new Text('AÑADIR'),
+                child: new Text(I18n.of(context).ADD),
                 onPressed: () {
                   Category newCategory = Category(
                       name: _textFieldController.text,
@@ -41,7 +43,7 @@ class CategoryBanner extends StatelessWidget {
                 },
               ),
               new FlatButton(
-                child: new Text('CANCELAR'),
+                child: new Text(I18n.of(context).CANCEL),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
