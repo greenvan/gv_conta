@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gvconta/widgets/dynamic_treeview.dart';
+import 'package:gvconta/ui/widgets/dynamic_treeview.dart';
 
 class Category implements BaseData {
   final String id;

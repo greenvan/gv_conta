@@ -3,11 +3,11 @@ import 'package:gvconta/model/category.dart';
 import 'package:gvconta/model/user.dart';
 import 'package:gvconta/system/i18n.dart';
 import 'package:gvconta/system/user_provider.dart';
-import 'package:gvconta/widgets/category_banner.dart';
-import 'package:gvconta/widgets/dynamic_treeview.dart';
+import 'package:gvconta/ui/widgets/category_banner.dart';
+import 'package:gvconta/ui/widgets/dynamic_treeview.dart';
 import 'package:gvconta/system/db.dart' as db;
-import 'package:gvconta/widgets/loading.dart';
-import 'package:gvconta/widgets/red_error.dart';
+import 'package:gvconta/ui/widgets/loading.dart';
+import 'package:gvconta/ui/widgets/red_error.dart';
 
 class CategoryListPage extends StatelessWidget {
   @override

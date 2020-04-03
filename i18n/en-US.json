@@ -25,5 +25,8 @@
     "DELETE": "DELETE",
     "CANCEL": "CANCEL",
     "confirmDeleteCategory": "Are you sure you want to delete the category? This cannot be undone.",
-    "addElementTo": "Add element to {parent} list"
+    "addElementTo": "Add element to {parent} list",
+    "EXIT": "LOG OUT",
+    "closeSession": "Close session?",
+    "confirmCloseSession": "Are you sure you want to log out?"
 }

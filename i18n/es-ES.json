@@ -25,5 +25,8 @@
     "DELETE": "BORRAR",
     "CANCEL": "CANCELAR",
     "confirmDeleteCategory": "¿Seguro que desea borrar la categoría? Esta acción no puede deshacerse",
-    "addElementTo": "'Añadir elemento en: {parent}"
+    "addElementTo": "Añadir elemento en: {parent}",
+    "EXIT": "SALIR",
+    "closeSession": "Cerrar sesión?",
+    "confirmCloseSession": "¿Seguro que desea salir de la sesión?"
 }

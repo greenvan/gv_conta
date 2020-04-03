@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/account.dart';
 import 'package:gvconta/system/user_provider.dart';
-import 'package:gvconta/widgets/navigation_arguments.dart';
+import 'package:gvconta/model/navigation_arguments.dart';
 
 class AccountCard extends StatelessWidget {
   final Account account;

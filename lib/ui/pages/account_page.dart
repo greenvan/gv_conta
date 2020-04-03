@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/account.dart';
 import 'package:gvconta/model/user.dart';
-import 'package:gvconta/widgets/account_card.dart';
-import 'package:gvconta/widgets/home_button.dart';
-import 'package:gvconta/widgets/navigation_arguments.dart';
+import 'package:gvconta/ui/widgets/account_card.dart';
+import 'package:gvconta/ui/widgets/home_button.dart';
+import 'package:gvconta/model/navigation_arguments.dart';
 import 'package:gvconta/system/user_provider.dart';
 
 class AccountPage extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/account.dart';
 import 'package:gvconta/model/user.dart';
-import 'package:gvconta/widgets/navigation_arguments.dart';
+import 'package:gvconta/model/navigation_arguments.dart';
 
 class DiaryPage extends StatelessWidget {
   @override

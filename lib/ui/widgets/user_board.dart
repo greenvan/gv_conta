@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/user.dart';
-import 'package:gvconta/widgets/user_card.dart';
+import 'package:gvconta/ui/widgets/user_card.dart';
 
 import 'home_button.dart';
 

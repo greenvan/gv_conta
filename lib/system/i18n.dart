@@ -86,6 +86,12 @@ class I18n implements WidgetsLocalizations {
   String get confirmDeleteCategory => "Are you sure you want to delete the category? This cannot be undone.";
   /// "Add element to ${parent} list"
   String addElementTo(String parent) => "Add element to ${parent} list";
+  /// "LOG OUT"
+  String get EXIT => "LOG OUT";
+  /// "Close session?"
+  String get closeSession => "Close session?";
+  /// "Are you sure you want to log out?"
+  String get confirmCloseSession => "Are you sure you want to log out?";
 }
 
 class _I18n_en_US extends I18n {
@@ -176,9 +182,18 @@ class _I18n_es_ES extends I18n {
   /// "¿Seguro que desea borrar la categoría? Esta acción no puede deshacerse"
   @override
   String get confirmDeleteCategory => "¿Seguro que desea borrar la categoría? Esta acción no puede deshacerse";
-  /// "'Añadir elemento en: ${parent}"
+  /// "Añadir elemento en: ${parent}"
   @override
-  String addElementTo(String parent) => "'Añadir elemento en: ${parent}";
+  String addElementTo(String parent) => "Añadir elemento en: ${parent}";
+  /// "SALIR"
+  @override
+  String get EXIT => "SALIR";
+  /// "Cerrar sesión?"
+  @override
+  String get closeSession => "Cerrar sesión?";
+  /// "¿Seguro que desea salir de la sesión?"
+  @override
+  String get confirmCloseSession => "¿Seguro que desea salir de la sesión?";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

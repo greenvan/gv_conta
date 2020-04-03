@@ -3,10 +3,10 @@ import 'package:gvconta/model/account.dart';
 import 'package:gvconta/model/user.dart';
 import 'package:gvconta/system/db.dart' as db;
 import 'package:gvconta/system/user_provider.dart';
-import 'package:gvconta/widgets/account_list.dart';
-import 'package:gvconta/widgets/loading.dart';
-import 'package:gvconta/widgets/navigation_arguments.dart';
-import 'package:gvconta/widgets/red_error.dart';
+import 'package:gvconta/ui/widgets/account_list.dart';
+import 'package:gvconta/ui/widgets/loading.dart';
+import 'package:gvconta/model/navigation_arguments.dart';
+import 'package:gvconta/ui/widgets/red_error.dart';
 
 class AccountListPage extends StatelessWidget {
   @override
