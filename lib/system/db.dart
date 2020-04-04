@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gvconta/model/account.dart';
 import 'package:gvconta/model/category.dart';
+import 'package:gvconta/model/event.dart';
 import 'package:gvconta/model/user.dart';
 
 import 'auth_provider.dart';
@@ -60,6 +61,44 @@ Future<void> addAccount(User user, Account account) async {
       .collection('users/${user.uid}/accounts')
       .add(account.toFirestore());
 }
+
+//TODO: Delete account
+
+Stream<List<Event>> getEventList(
+    {@required String uid, @required String accountId, String parentId}) {
+  String path = '';
+  if (parentId != null) path += parentId + '/subevents/'; //S
+
+  return Firestore.instance
+      .collection('users/$uid/accounts/$accountId/events/$path')
+      .snapshots()
+      .map(toEventList);
+}
+
+Future<void> updateEventName(User user, Event event) async {
+  Map<String, dynamic> values = new Map<String, dynamic>();
+  values["name"] = event.name;
+  String path = '';
+  if (event.parentId != null)
+    path +=
+        event.parentId + '/subevents/'; //Si tiene padre lo ponemos en la ruta
+  path += event.id;
+  await Firestore.instance
+      .document('users/${user.uid}/accounts/${event.accountId}/events/$path')
+      .updateData(values);
+}
+
+Future<void> addEvent(User user, Event event) async {
+  String path = '';
+  if (event.parentId != null)
+    path =
+        '/${event.parentId}/subevents'; //Si tiene padre lo ponemos en la ruta
+
+  await Firestore.instance
+      .collection('users/${user.uid}/accounts/${event.accountId}/events$path')
+      .add(event.toFirestore());
+}
+//TODO: delete event
 
 Future<void> addUser(User user) async {
   await Firestore.instance
